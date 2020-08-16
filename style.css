@@ -118,10 +118,19 @@
     line-height: inherit;
     text-transform: uppercase;
     color: #ffffff;
-    background: linear-gradient(180deg, #4892EC 0%, #2F79D4 100%);
-    border: 1px solid #226DC8;
     box-sizing: border-box;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.form__button--active {
+    background: linear-gradient(180deg, #4892EC 0%, #2F79D4 100%);
+    border: 1px solid #226DC8;
+}
+
+
+.form__button--disabled {
+    background: linear-gradient(180deg, #818387 0%, #696B6F 100%);
+    border: none;
 }
 
 .form__button--further {
@@ -134,11 +143,6 @@
     border-radius: 6px;
 }
 
-.form__button:disabled {
-    background: linear-gradient(180deg, #818387 0%, #696B6F 100%);
-    border: none;
-}
-
 .form__button:hover,
 .form__button:focus {
     background: #3E8FF2;
@@ -149,3 +153,4 @@
     background: #256FCA;
     border: 1px solid #226DC8;
 }
+
