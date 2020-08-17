@@ -16,11 +16,48 @@
             <label class="form__label" for="email">Электронная почта</label>
             <input class="form__input form__input--contact" type="email" name="email" id="email" required>
             <label class="form__label" for="phone">Телефон</label>
-            <input class="form__input form__input--contact" type="tel" name="phone" id="phone" placeholder="+7 (___) ___ - __ - __" required>
+            <input class="form__input form__input--contact" type="tel" name="phone" id="phone" maxlength="12" placeholder="+7 (___) ___ - __ - __" required>
             <p class="form__summing">Вы укомплектовали забор <span></span> и <span></span> из материала <span></span> на сумму <span></span></p>
-            <button class="form__button form__button--order" type="submit">Отправить</button>
+            <button class="form__button form__button--disabled form__button--order" type="submit" id="submit" disabled>Отправить</button>
         </form>
     </main>
-    
+    <script>
+    const name = document.getElementById("name");
+    const email = document.getElementById("email");
+    const phone = document.getElementById("phone");
+    const submit = document.getElementById("submit");
+
+    // Проверяем фокус
+    phone.addEventListener('focus', _ => {
+      // Если там ничего нет или есть, но левое
+      if(!/^\+\d*$/.test(phone.value))
+        // То вставляем знак плюса как значение
+        phone.value = '+';
+    });
+
+    phone.addEventListener('keypress', e => {
+      // Отменяем ввод не цифр
+      if(!/\d/.test(e.key))
+        e.preventDefault();
+    });
+
+    name.addEventListener('change', required);
+    email.addEventListener('change', required);
+    phone.addEventListener('change', required);
+
+    function required(e) {
+        if (name.value === "" || email.value === "" || phone.value === "") {
+            if (submit.classList.contains("form__button--active")) {
+                submit.classList.remove("form__button--active");
+                submit.classList.add("form__button--disabled");
+                submit.disabled = true;
+            }
+        } else {
+            submit.classList.remove("form__button--disabled");
+            submit.classList.add("form__button--active");
+            submit.disabled = false;
+        }
+    }
+    </script>
 </body>
 </html>
