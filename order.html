@@ -13,24 +13,99 @@
         <form class="page__form form" action="contacts.html" method="post">
                 <label class="form__label" for="length">Длина забора</label>
                 <input class="form__input form__input--number" type="number" name="length" id="length" placeholder="0" required>
-                <p class="form__unit">метров</p>
+                <p class="form__unit" id="length-unit">метров</p>
                 <label class="form__label" for="height">Высота забора</label>
                 <input class="form__input form__input--number" type="number" name="height" id="height" placeholder="0" required>
-                <p class="form__unit">метров</p>
+                <p class="form__unit" id="height-unit">метров</p>
                 <label class="form__label" for="material">Материал забора</label>
                 <select class="form__dropdown" name="material" id="material" size="1" required>
-                    <option class="form__dropdown-option">Выберите материал</option>
-                    <option class="form__dropdown-option" value="Профнастил 400">Профнастил 400 Р за м<span>2</span></option>
-                    <option class="form__dropdown-option" value="Модули 500">Модули 500 Р за м<span>2</span></option>
-                    <option class="form__dropdown-option" value="Бетон 700">Бетон 700 Р за м<span>2</span></option>
-                    <option class="form__dropdown-option" value="Сетка 200">Сетка 200 Р за м<span>2</span></option>
+                    <option class="form__dropdown-option" value="">Выберите материал</option>
+                    <option class="form__dropdown-option" value="400">Профнастил 400 Р за м<span>2</span></option>
+                    <option class="form__dropdown-option" value="500">Модули 500 Р за м<span>2</span></option>
+                    <option class="form__dropdown-option" value="700">Бетон 700 Р за м<span>2</span></option>
+                    <option class="form__dropdown-option" value="200">Сетка 200 Р за м<span>2</span></option>
                 </select>
                 <input class="form__checkbox" type="checkbox" id="assembling" name="assembling">
                 <label class="form__checkbox-label" for="assembling">Нужен монтаж</label>
-                <p class="form__sum">Сумма заказа: <span class="form__sum-total"></span></p>
-                <button class="form__button form__button--further" type="submit">Далее</button>
+                <p class="form__sum">Сумма заказа: <span id="form__sum-total"></span></p>
+                <button class="form__button form__button--disabled form__button--further" type="submit" id="submit" disabled>Далее</button>
         </form>        
     </main>
+
+<script>
+    const length = document.getElementById("length");
+    const height = document.getElementById("height");
+    const material = document.getElementById("material");
+    const assembling = document.getElementById("assembling");
+    const submit = document.getElementById("submit");
+
+    length.addEventListener('change', required);
+    height.addEventListener('change', required);
+    material.addEventListener('change', required);
+
+    function required(e) {
+        if (length.value === "" || height.value === "" || material.value === "") {
+            if (submit.classList.contains("form__button--active")) {
+                submit.classList.remove("form__button--active");
+                submit.classList.add("form__button--disabled");
+                submit.disabled = true;
+            }
+        } else {
+            submit.classList.remove("form__button--disabled");
+            submit.classList.add("form__button--active");
+            submit.disabled = false;
+        }
+    }
+
+    length.addEventListener('change', calculate);
+    height.addEventListener('change', calculate);
+    material.addEventListener('change', calculate);
+    assembling.addEventListener('change', calculate);
+
+    function calculate(e) {
+        if (length.value === "" || height.value === "" || material.value === "") {
+            document.getElementById("form__sum-total").innerHTML = "0";
+        } else {
+            const price = calc(
+                parseInt(length.value),
+                parseInt(height.value),
+                parseInt(material.value),
+                assembling.checked);
+            document.getElementById("form__sum-total").innerHTML = `${price}`;
+        }
+    }
+
+    function calc(height, length, price, isAssemble) {
+        let total =  height * length * price;
+        if (isAssemble) {
+            total = total + 200
+        }
+        return total
+    }
+
+    const lengthUnit = document.getElementById("length-unit");
+    length.addEventListener('change', (event) => {
+        plural(lengthUnit, event.target.value, ["метр", "метра", "метров"])
+    });
+
+    const heightUnit = document.getElementById("height-unit");
+    height.addEventListener('change', (event) => {
+        plural(heightUnit, event.target.value, ["метр", "метра", "метров"])
+    });
+
+    function plural(element, countStr, words) {
+        let count = parseInt(countStr);
+        let text;
+        if (count === 1) {
+            text = words[0]
+        } else if (count > 1 && count < 5) {
+            text = words[1]
+        } else {
+            text = words[2]
+        }
+        element.innerHTML = text
+    }
+</script>
     
 </body>
 </html>
