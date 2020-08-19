@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма заказа</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="page">
+    <main class="page__main">
+        <h1 class="visually-hidden">Страница заказа забора</h1>
+        <section class="page__section page__section--fence">
+            <h2 class="page__heading">Заказать забор</h2>
+            <form class="page__form page__form--fence" name="fence-form" action="" method="post">
+                    <label class="form__label" for="length">Длина забора</label>
+                    <input class="form__input form__input--number" type="number" name="length" id="length" placeholder="0" required>
+                    <p class="form__unit" id="length-unit">метров</p>
+                    <label class="form__label" for="height">Высота забора</label>
+                    <input class="form__input form__input--number" type="number" name="height" id="height" placeholder="0" required>
+                    <p class="form__unit" id="height-unit">метров</p>
+                    <label class="form__label" for="material">Материал забора</label>
+                    <select class="form__dropdown" name="material" id="material" size="1" required>
+                        <option class="form__dropdown-option" value="">Выберите материал</option>
+                        <option class="form__dropdown-option" value="400">Профнастил 400 Р за м<span class="square">2</span></option>
+                        <option class="form__dropdown-option" value="500">Модули 500 Р за м<span class="square">2</span></option>
+                        <option class="form__dropdown-option" value="700">Бетон 700 Р за м<span class="square">2</span></option>
+                        <option class="form__dropdown-option" value="200">Сетка 200 Р за м<span class="square">2</span></option>
+                    </select>
+                    <input class="form__checkbox" type="checkbox" id="assembling" name="assembling">
+                    <label class="form__checkbox-label" for="assembling">Нужен монтаж</label>
+                    <p class="form__sum">Сумма заказа: <span class="form__sum-style"><span class="sum-total"></span> &#8381;</span></p>
+                    <button class="form__button form__button--disabled form__button--further" type="submit" disabled>Далее</button>
+            </form>   
+        </section>
+        <section class="page__section page__section--contacts hidden-section">
+            <h2 class="page__heading">Пожалуйста, представьтесь</h2>
+            <form class="page__form page__form--contacts" name="contacts-form" action="" method="post">
+                <label class="form__label" for="name">Ваше имя</label>
+                <input class="form__input form__input--contact" type="text" name="name" id="user-name" required>
+                <label class="form__label" for="email">Электронная почта</label>
+                <input class="form__input form__input--contact" type="email" name="email" id="user-email" required>
+                <label class="form__label" for="phone">Телефон</label>
+                <input class="form__input form__input--contact" type="tel" name="phone" id="user-phone" maxlength="12" placeholder="+7 (___) ___ - __ - __" required>
+                <p class="form__summing">Вы укомплектовали забор <span class="form__fence-style">длиной <span id="length-value"></span> <span id="length-unit-value"></span></span> и <span class="form__fence-style">высотой <span id="height-value"></span> <span id="height-unit-value"></span></span> из материала <span id="material-item"></span> на сумму <span class="form__sum-style"><span id="sum-total-value"></span> &#8381;</span></p>
+                <button class="form__button form__button--disabled form__button--order" type="submit" id="submit" disabled>Отправить</button>
+            </form>
+        </section>
+        <section class="page__section page__section--message hidden-section">
+            <h2 class="page__heading"><span id="user-name-value"></span>, заказ <span class="page__order-style">№<span id="order-number"></span></span> сформирован!</h2>
+            <p class="page__text">Мы повторили его комплектацию на почту <span class="page__order-style page__span" id="user-email-value"></span></p>
+            <p class="page__text">В ближайшее время наш специалист свяжется с вами по телефону <span class="page__order-style page__span" id="user-phone-value"></span></p>
+        </section>     
+    </main>
+
+<script src="script.js"></script>
+    
+</body>
+</html>

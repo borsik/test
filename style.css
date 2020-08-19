@@ -8,7 +8,25 @@
     background-size: cover;
 }
 
-.page__main {
+.visually-hidden:not(:focus):not(:active),
+input[type="checkbox"].visually-hidden,
+input[type="radio"].visually-hidden {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+
+  white-space: nowrap;
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.page__section {
     width: 64%;
     min-height: 76%;
     margin: auto;
@@ -17,7 +35,7 @@
     box-sizing: border-box;
 }
 
-.page__main--popup {
+.page__section--message {
     min-height: 40%;
     margin: auto;
     margin-top: 13%;
@@ -55,6 +73,7 @@
     border-radius: 3px;
 }
 
+.form__input:focus,
 .form__input:active {
     border-color: #4892EC;
 }
@@ -100,6 +119,10 @@
     border-radius: 3px; 
 }
 
+.square {
+    vertical-align: super;
+}
+
 .form__checkbox {
     margin-bottom: 31px;
 }
@@ -109,6 +132,22 @@
     margin-bottom: 30px;
     font-size: 24px;
     line-height: 33px;
+}
+
+.form__sum-style {
+    color: #b23057;
+}
+
+.form__fence-style {
+    color: #5c98e5;
+}
+
+.page__order-style {
+    color: #2f79d4;
+}
+
+.page__span {
+    display: block;
 }
 
 .form__button {
@@ -154,3 +193,6 @@
     border: 1px solid #226DC8;
 }
 
+.hidden-section {
+    display: none;
+}
