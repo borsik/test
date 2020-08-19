@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="page">
+<body class="page page--order" onload="fenceChoice()">
     <main class="page__main">
         <h1 class="page__heading">Заказать забор</h1>
         <form class="page__form form" name="fence-form" action="contacts.html" method="post">
@@ -28,7 +28,7 @@
                 <input class="form__checkbox" type="checkbox" id="assembling" name="assembling">
                 <label class="form__checkbox-label" for="assembling">Нужен монтаж</label>
                 <p class="form__sum">Сумма заказа: <span class="form__sum-total"></span> &#8381;</p>
-                <button class="form__button form__button--disabled form__button--further" type="submit" id="submit" disabled>Далее</button>
+                <button class="form__button form__button--disabled form__button--further" type="submit" disabled>Далее</button>
         </form>        
     </main>
 
