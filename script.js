@@ -3,7 +3,7 @@ const userContactsPage = document.querySelector ('.page__section--contacts');
 const orderMessagePage = document.querySelector ('.page__section--message');
 const fenceChoiceForm = document.querySelector ('.page__form--fence');
 const userContactsForm = document.querySelector ('.page__form--contacts');
-
+const formInput = document.querySelectorAll ('.form__input');
 const fenceLength = document.querySelector ('#length');
 const fenceHeight = document.querySelector ('#height');
 const fenceMaterial = document.querySelector ('#material');
@@ -19,11 +19,29 @@ const orderSubmit = document.querySelector ('.form__button--order');
 const fenceLengthValue = document.querySelector ('#length-value');
 const fenceHeightValue = document.querySelector ('#height-value');
 const fenceMaterialValue = document.querySelector ('#material-item');
-const fencePriceValue = document.querySelector ('#sum-total-value');
 const userNameValue = document.querySelector ('#user-name-value');
 const userEmailValue = document.querySelector ('#user-email-value');
 const userPhoneValue = document.querySelector ('#user-phone-value');
+var fenceLengthUnitValue = document.querySelector ('#length-unit-value');
+var fenceHeightUnitValue = document.querySelector ('#height-unit-value');
+var fencePriceValue = document.querySelector ('#sum-total-value');
+var orderNumberValue = document.querySelector ('#order-number');
+var price = 0;
+var textLength = 0;
+var textHeight = 0;
+var count = 0;
+var words = ["метр", "метра", "метров"];
+var orderCount = 1;
 
+formInput.forEach(function(item){
+    item.addEventListener('blur', function() {
+        if (!formInput.value) {
+            item.classList.add('form__input--invalid');
+        } else {
+            item.classList.remove('form__input--invalid');
+        }
+    })
+});
 
 function required() {
     if (!fenceLength.value || !fenceHeight.value || !fenceMaterial.value) {
@@ -51,7 +69,7 @@ function calculate() {
     if (!fenceLength.value || !fenceHeight.value || !fenceMaterial.value) {
         fencePrice.innerHTML = '0';
     } else {
-        var price = calc(
+        price = calc(
             parseInt(fenceLength.value),
             parseInt(fenceHeight.value),
             parseInt(fenceMaterial.value),
@@ -60,18 +78,28 @@ function calculate() {
     }
 }
 
-function plural(element, countStr) {
-    const words = ["метр", "метра", "метров"]
-    const count = parseInt(countStr);
-    let text;
+function pluralLength(element, countStr) {
+    count = parseInt(countStr);
     if (count === 1) {
-        text = words[0]
+        textLength = words[0]
     } else if (count > 1 && count < 5) {
-        text = words[1]
+        textLength = words[1]
     } else {
-        text = words[2]
+        textLength = words[2]
     }
-    element.innerHTML = text
+    element.innerHTML = textLength
+}
+
+function pluralHeight(element, countStr) {
+    count = parseInt(countStr);
+    if (count === 1) {
+        textHeight = words[0]
+    } else if (count > 1 && count < 5) {
+        textHeight = words[1]
+    } else {
+        textHeight = words[2]
+    }
+    element.innerHTML = textHeight;
 }
 
 function requiredContacts() {
@@ -88,6 +116,11 @@ function requiredContacts() {
     }
 }
 
+function orderNumber() {
+    orderCount++;
+    return orderCount;
+}
+
     fenceLength.addEventListener('change', required);
     fenceHeight.addEventListener('change', required);
     fenceMaterial.addEventListener('change', required);
@@ -97,8 +130,8 @@ function requiredContacts() {
     fenceMaterial.addEventListener('change', calculate);
     fenceAssembling.addEventListener('change', calculate);
 
-    fenceLength.addEventListener('change', (event) => { plural(lengthUnit, event.target.value) });
-    fenceHeight.addEventListener('change', (event) => { plural(heightUnit, event.target.value) });
+    fenceLength.addEventListener('change', (event) => { pluralLength(lengthUnit, event.target.value) });
+    fenceHeight.addEventListener('change', (event) => { pluralHeight(heightUnit, event.target.value) });
 
     userName.addEventListener('change', requiredContacts);
     userEmail.addEventListener('change', requiredContacts);
@@ -121,6 +154,9 @@ function requiredContacts() {
         fenceLengthValue.innerHTML = fenceLength.value;
         fenceHeightValue.innerHTML = fenceHeight.value;
         fenceMaterialValue.innerHTML = fenceMaterial.value;
+        fenceLengthUnitValue.innerHTML = textLength;
+        fenceHeightUnitValue.innerHTML = textHeight;
+        fencePriceValue.innerHTML = `${price}`;
     });
 
     userContactsForm.addEventListener('submit', function(evt){
@@ -130,4 +166,5 @@ function requiredContacts() {
         userNameValue.innerHTML = userName.value;
         userEmailValue.innerHTML = userEmail.value;
         userPhoneValue.innerHTML = userPhone.value;
+        orderNumberValue.innerHTML = orderCount;
     });

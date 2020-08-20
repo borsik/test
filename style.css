@@ -76,10 +76,14 @@ input[type="radio"].visually-hidden {
 .form__input:focus,
 .form__input:active {
     border-color: #4892EC;
+    outline: none;
 }
 
+.form__input--invalid,
 .form__input:invalid {
+    position: relative;
     border-color: #C98E99;
+    outline: none;
 }
 
 .form__input--number {
