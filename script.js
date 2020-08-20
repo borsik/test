@@ -18,26 +18,28 @@ const userPhone = document.querySelector ('#user-phone');
 const orderSubmit = document.querySelector ('.form__button--order');
 const fenceLengthValue = document.querySelector ('#length-value');
 const fenceHeightValue = document.querySelector ('#height-value');
-const fenceMaterialValue = document.querySelector ('#material-item');
+const fenceMaterialName = document.querySelector ('#material-item');
 const userNameValue = document.querySelector ('#user-name-value');
 const userEmailValue = document.querySelector ('#user-email-value');
 const userPhoneValue = document.querySelector ('#user-phone-value');
-var fenceLengthUnitValue = document.querySelector ('#length-unit-value');
-var fenceHeightUnitValue = document.querySelector ('#height-unit-value');
-var fencePriceValue = document.querySelector ('#sum-total-value');
-var orderNumberValue = document.querySelector ('#order-number');
-var price = 0;
-var textLength = 0;
-var textHeight = 0;
-var count = 0;
-var words = ["метр", "метра", "метров"];
-var orderCount = 1;
+let fenceLengthUnitValue = document.querySelector ('#length-unit-value');
+let fenceHeightUnitValue = document.querySelector ('#height-unit-value');
+let fencePriceValue = document.querySelector ('#sum-total-value');
+let orderNumberValue = document.querySelector ('#order-number');
+let selectedFenceMaterial = fenceMaterial.options[fenceMaterial.selectedIndex].text;
+let materialName = 0;
+let price = 0;
+let textLength = 0;
+let textHeight = 0;
+let count = 0;
+let words = ["метр", "метра", "метров"];
+let orderCount = 1;
 
 formInput.forEach(function(item){
     item.addEventListener('blur', function() {
-        if (!formInput.value) {
+        if (!item.value) {
             item.classList.add('form__input--invalid');
-        } else {
+        } else if (item.classList.contains('form__input--invalid')) {
             item.classList.remove('form__input--invalid');
         }
     })
@@ -56,6 +58,12 @@ function required() {
         fenceSubmit.disabled = false;
     }
 }
+
+function getFenceMaterialName() {
+    let space = " ";
+    let arrayOfStrings = selectedFenceMaterial.split(space);
+    materialName = arrayOfStrings[0];
+} 
 
 function calc(height, length, price, isAssemble) {
     let total =  height * length * price;
@@ -153,7 +161,7 @@ function orderNumber() {
         userContactsPage.classList.remove('hidden-section');
         fenceLengthValue.innerHTML = fenceLength.value;
         fenceHeightValue.innerHTML = fenceHeight.value;
-        fenceMaterialValue.innerHTML = fenceMaterial.value;
+        fenceMaterialName.innerHTML = materialName;
         fenceLengthUnitValue.innerHTML = textLength;
         fenceHeightUnitValue.innerHTML = textHeight;
         fencePriceValue.innerHTML = `${price}`;
