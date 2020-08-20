@@ -33,11 +33,11 @@ var count = 0;
 var words = ["метр", "метра", "метров"];
 var orderCount = 1;
 
-formInput.forEach(function(item){
+formInput.forEach(function(item) {
     item.addEventListener('blur', function() {
-        if (!formInput.value) {
+        if (!item.value) {
             item.classList.add('form__input--invalid');
-        } else {
+        } else if (item.classList.contains('form__input--invalid')) {
             item.classList.remove('form__input--invalid');
         }
     })
