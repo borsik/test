@@ -35,7 +35,7 @@ let count = 0;
 let words = ["метр", "метра", "метров"];
 let orderCount = 1;
 
-formInput.forEach(function(item){
+formInput.forEach(function(item) {
     item.addEventListener('blur', function() {
         if (!item.value) {
             item.classList.add('form__input--invalid');
