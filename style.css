@@ -64,7 +64,6 @@ input[type="radio"].visually-hidden {
 
 .form__input {
     height: 50px;
-    margin-bottom: 30px;
     padding: 14px 15px 17px;
     border: 1px solid #D7D7D7;
     background: linear-gradient(180deg, #F8F8F8 0%, rgba(243, 243, 243, 0) 100%, #F2F2F2 100%);
@@ -86,13 +85,41 @@ input[type="radio"].visually-hidden {
     outline: none;
 }
 
+.form__input--warning {
+    margin-bottom: 12px;
+    font-size: 13px;
+    line-height: 18px;
+    color: #C98E99;
+}
+
+.form__check {
+    display: inline-block;
+    width: 21px;
+    height: 16px;
+    margin-top: 15px;
+    margin-left: auto;
+    background-image: url("img/check.svg");
+}
+
+.form__wrapper {
+    display: flex;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+.hide-check {
+    opacity: 0;
+}
+
 .form__input--number {
-    width: 47%;
+    width: 57%;
     margin-right: 3%;
 }
 
 .form__input--contact {
-    width: 63%;
+    width: 73%;
 }
 
 .form__input--contact:last-of-type {
@@ -101,12 +128,13 @@ input[type="radio"].visually-hidden {
 
 .form__unit {
     display: inline;
+    align-self: center;
     margin: 0;
 }
 
 .form__dropdown {
     display: block;
-    width: 65%;
+    width: 75%;
     height: 50px;
     margin-bottom: 26px;
     padding-left: 15px;

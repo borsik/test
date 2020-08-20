@@ -3,6 +3,9 @@ const userContactsPage = document.querySelector ('.page__section--contacts');
 const orderMessagePage = document.querySelector ('.page__section--message');
 const fenceChoiceForm = document.querySelector ('.page__form--fence');
 const userContactsForm = document.querySelector ('.page__form--contacts');
+const requiredInputs = document.querySelectorAll ('.form-required');
+const formCheck = document.querySelectorAll ('.form__check');
+const formWarning = document.querySelectorAll ('.form__input--warning');
 const formInput = document.querySelectorAll ('.form__input');
 const fenceLength = document.querySelector ('#length');
 const fenceHeight = document.querySelector ('#height');
@@ -34,12 +37,31 @@ let count = 0;
 let words = ["метр", "метра", "метров"];
 let orderCount = 1;
 
+
+requiredInputs.forEach(function(item) {
+    if (!item.value) {
+        formCheck.forEach(function(check) {
+            check.classList.add('hide-check');
+        })
+    } else if (item.classList.contains('hide-check')) {
+        formCheck.forEach(function(check) {
+            check.classList.remove('hide-check');
+        })
+    }
+});
+
 formInput.forEach(function(item) {
     item.addEventListener('blur', function() {
         if (!item.value) {
             item.classList.add('form__input--invalid');
+            formWarning.forEach(function(warn) {
+                warn.classList.remove('hidden');
+            })
         } else if (item.classList.contains('form__input--invalid')) {
             item.classList.remove('form__input--invalid');
+            formWarning.forEach(function(warn) {
+                warn.classList.add('hidden');
+            })
         }
     })
 });
@@ -63,6 +85,7 @@ function getFenceMaterialName() {
     let selectedFenceMaterial = fenceMaterial.options[fenceMaterial.selectedIndex].text;
     let arrayOfStrings = selectedFenceMaterial.split(space);
     materialName = arrayOfStrings[0];
+    return materialName
 } 
 
 function calc(height, length, price, isAssemble) {
@@ -157,6 +180,7 @@ function orderNumber() {
 
     fenceChoiceForm.addEventListener('submit', function(evt){
         evt.preventDefault();
+        getFenceMaterialName();
         fenceChoicePage.classList.add('hidden-section');
         userContactsPage.classList.remove('hidden-section');
         fenceLengthValue.innerHTML = fenceLength.value;
