@@ -26,7 +26,6 @@ let fenceLengthUnitValue = document.querySelector ('#length-unit-value');
 let fenceHeightUnitValue = document.querySelector ('#height-unit-value');
 let fencePriceValue = document.querySelector ('#sum-total-value');
 let orderNumberValue = document.querySelector ('#order-number');
-let selectedFenceMaterial = fenceMaterial.options[fenceMaterial.selectedIndex].text;
 let materialName = 0;
 let price = 0;
 let textLength = 0;
@@ -61,6 +60,7 @@ function required() {
 
 function getFenceMaterialName() {
     let space = " ";
+    let selectedFenceMaterial = fenceMaterial.options[fenceMaterial.selectedIndex].text;
     let arrayOfStrings = selectedFenceMaterial.split(space);
     materialName = arrayOfStrings[0];
 } 
@@ -68,7 +68,7 @@ function getFenceMaterialName() {
 function calc(height, length, price, isAssemble) {
     let total =  height * length * price;
     if (isAssemble) {
-        total = total + 200
+        total = total + 200;
     }
     return total
 }
